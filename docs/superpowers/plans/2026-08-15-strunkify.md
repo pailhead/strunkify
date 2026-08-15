@@ -86,13 +86,11 @@ DIRECTIVE="Write all prose in Strunk's style: active voice, omit needless words,
 
 [ -d "$HOME/.claude" ] || { echo "error: ~/.claude not found — is Claude Code installed?" >&2; exit 1; }
 
+[ -d "$SKILL_SRC" ] || { echo "error: $SKILL_SRC not found — run install.sh from its repo" >&2; exit 1; }
+
 mkdir -p "$HOME/.claude/skills"
-if [ -e "$SKILL_DEST" ]; then
-  echo "skill already installed at $SKILL_DEST"
-else
-  ln -s "$SKILL_SRC" "$SKILL_DEST"
-  echo "linked $SKILL_DEST -> $SKILL_SRC"
-fi
+ln -sfn "$SKILL_SRC" "$SKILL_DEST"
+echo "linked $SKILL_DEST -> $SKILL_SRC"
 
 if [ -f "$CLAUDE_MD" ] && grep -qF "strunkify skill holds the full rules" "$CLAUDE_MD"; then
   echo "directive already present in $CLAUDE_MD"
@@ -120,7 +118,7 @@ grep -cF "strunkify skill holds the full rules" "$SANDBOX/.claude/CLAUDE.md"
 rm -rf "$SANDBOX"
 ```
 
-Expected: first run prints "linked" and "appended"; second run prints "already installed" and "already present"; readlink prints the repo skill path; grep count is exactly `1` (idempotent).
+Expected: both runs print "linked"; first run prints "appended", second "already present"; readlink prints the repo skill path; grep count is exactly `1` (idempotent).
 
 - [ ] **Step 4: Commit**
 

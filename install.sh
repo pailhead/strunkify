@@ -2,7 +2,7 @@
 set -eu
 
 SKILL_SRC="$(cd "$(dirname "$0")" && pwd)/skill/strunkify"
-DIRECTIVE="Write all prose in Strunk's style: active voice, omit needless words, concrete language, no hedging or filler. The strunkify skill holds the full rules; they govern every response."
+DIRECTIVE="Write all prose in Strunk's style: active voice, omit needless words, concrete language, no hedging or filler."
 
 [ -d "$SKILL_SRC" ] || { echo "error: $SKILL_SRC not found — run install.sh from its repo" >&2; exit 1; }
 
@@ -12,7 +12,7 @@ install_into() {
   mkdir -p "$dir/skills"
   ln -sfn "$SKILL_SRC" "$dir/skills/strunkify"
   echo "linked $dir/skills/strunkify -> $SKILL_SRC"
-  if [ -f "$md" ] && grep -qF "strunkify skill holds the full rules" "$md"; then
+  if [ -f "$md" ] && grep -qF "Write all prose in Strunk's style" "$md"; then
     echo "directive already present in $md"
   else
     printf '\n%s\n' "$DIRECTIVE" >> "$md"

@@ -1,6 +1,6 @@
 ---
 name: strunkify
-description: Use when writing any prose a human will read — feedback, reviews, explanations, summaries, docs, commit messages. Applies Strunk's rules to make it clear and brief.
+description: Use when the user asks to strunkify, tighten, or rewrite text in Strunk's style. Applies the full Elements of Style rules to the given prose.
 ---
 
 # Strunkify

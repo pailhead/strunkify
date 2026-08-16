@@ -11,12 +11,24 @@ git clone https://github.com/pailhead/strunkify
 sh strunkify/install.sh
 ```
 
-The installer detects Claude Code (`~/.claude`) and Codex (`~/.codex`) and, for each:
+The installer finds every agent you have installed and, for each:
 
 - symlinks [skill/strunkify](skill/strunkify) into its `skills/` directory;
-- appends one line to its global instructions (`CLAUDE.md` / `AGENTS.md`):
+- appends one line to its global instructions:
 
 > Write all prose in Strunk's style: active voice, omit needless words, concrete language, no hedging or filler.
+
+| Agent | Skill | Directive |
+|---|---|---|
+| Claude Code | `~/.claude/skills/` | `~/.claude/CLAUDE.md` |
+| Codex | `~/.codex/skills/` | `~/.codex/AGENTS.md` |
+| Gemini CLI | `~/.gemini/skills/` | `~/.gemini/GEMINI.md` |
+| Copilot CLI | `~/.copilot/skills/` | `~/.copilot/copilot-instructions.md` |
+| OpenCode | `~/.config/opencode/skills/` | `~/.config/opencode/AGENTS.md` |
+| Cursor | `~/.cursor/skills/` | — (no global instructions file) |
+| `~/.agents` standard | `~/.agents/skills/` | — |
+
+Cursor gets the skill but not the always-on directive: it has no global instructions file. The last row is the shared skills directory that Cursor, OpenCode, Copilot, and Gemini all read.
 
 Idempotent — run it twice, nothing doubles. New sessions pick it up; open ones keep their old rules.
 
@@ -49,7 +61,9 @@ It runs the prompt twice through fresh `claude -p` sessions — directive stripp
 ## Uninstall
 
 ```sh
-rm ~/.claude/skills/strunkify ~/.codex/skills/strunkify
+rm -f ~/.claude/skills/strunkify ~/.codex/skills/strunkify ~/.gemini/skills/strunkify \
+      ~/.copilot/skills/strunkify ~/.config/opencode/skills/strunkify \
+      ~/.cursor/skills/strunkify ~/.agents/skills/strunkify
 ```
 
-Then delete the "Write all prose in Strunk's style…" line from `~/.claude/CLAUDE.md` and `~/.codex/AGENTS.md`.
+Then delete the "Write all prose in Strunk's style…" line from each instructions file in the table above.

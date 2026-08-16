@@ -1,8 +1,8 @@
 # strunkify
 
-Make your coding agents write like Strunk: active voice, no needless words, no hedging, no filler.
+Make your coding agents write like Strunk - plain, direct, and short.
 
-One 260-word skill file and a one-line directive. No dependencies, no reference documents, no runtime.
+One 260 word skill file and a one-line directive.
 
 ## Install
 
@@ -22,13 +22,13 @@ Idempotent — run it twice, nothing doubles. New sessions pick it up; open ones
 
 ## What you get
 
-**Always on.** The directive governs every response the agent writes — explanations, reviews, summaries — silently, with no per-turn announcements or lookups.
+**Always on.** The directive governs every response the agent writes - explanations, reviews, summaries.
 
 **On demand.** `/strunkify <text>` invokes the full eight rules and calibration examples on any prose you paste.
 
 ## Does it work?
 
-[demo/](demo/) holds a controlled comparison: two identical agents reviewed the same flawed function, one plain, one under the rules. The plain one opens:
+Maybe, try it out. [demo/](demo/) holds a controlled comparison: two identical agents reviewed the same flawed function, one plain, one under the rules. The plain one opens:
 
 > Thanks for sharing this — the function is straightforward, but there are a few issues worth fixing before it ships…
 
